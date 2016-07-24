@@ -52,7 +52,7 @@ var TimeSlot = React.createClass({
   handleTaskCreation() {
     // if input fields are already shown, create a new task.
     if (this.state.showInputFields) {
-      this.props.createTask(this.props.timeSlot.id, 2, this.state.taskName)
+      this.props.createTask(this.props.timeSlot.id, Number(this.state.taskDuration), this.state.taskName)
       this.setState({
         showInputFields: false
       })
@@ -70,6 +70,12 @@ var TimeSlot = React.createClass({
     })
   },
 
+  handleTaskDurationChange(event) {
+    this.setState({
+      taskDuration: event.target.value
+    })
+  },
+
   render() {
     return (
       <tr>
@@ -77,12 +83,23 @@ var TimeSlot = React.createClass({
         <td> { this.state.taskName } </td>
         <td> <span>
               { this.state.showInputFields
-                ? <input 
-                    type='text'
-                    placeholder='What do you want to do?'
-                    value={this.state.taskName}
-                    onChange={this.handleTaskNameChange}
-                  /> 
+                ? <span>
+                    <input 
+                      type='text'
+                      placeholder='What do you want to do?'
+                      value={this.state.taskName}
+                      onChange={this.handleTaskNameChange}
+                    />
+                    <select value={this.state.taskDuration} onChange={this.handleTaskDurationChange}>
+                      <option value="0.5"> 30 minutes </option>
+                      <option value="1"> 1 hour </option>
+                      <option value="1.5"> 1 hour, 30 minutes </option>
+                      <option value="2"> 2 hours </option>
+                      <option value="2.5"> 2 hours, 30 minutes </option>
+                      <option value="3"> 3 hours </option>
+                    </select>
+                      
+                  </span>
                 : null }
                 <button onClick={this.handleTaskCreation}> Add Task </button>
               </span>
