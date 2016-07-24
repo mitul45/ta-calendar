@@ -15,43 +15,59 @@ var TimeSlot = React.createClass({
   },
 
   formatSlot(slot) {
-    return this.formatTime(slot.start) + ' to ' + this.formatTime(slot.end);
+    return this.formatTime(slot.startTime) + ' to ' + this.formatTime(slot.endTime);
   },
 
   getInitialState() {
     return {
       showInputFields: false,
-      task: null
+      taskName: null
     }
   },
 
   setTask(task) {
     this.setState({
-      task: task
+      taskName: task
     })
   },
 
-  addTask() {
+  createTask() {
+    // if input fields are already shown, create a new task.
+    if (this.state.showInputFields) {
+      this.props.createTask(this.props.timeSlot.id, 2, this.state.taskName)
+      this.setState({
+        showInputFields: false
+      })
+    } else {
+      // show input boxes
+      this.setState({
+        showInputFields: true
+      })
+    }
+  },
+
+  handleTaskNameChange(event) {
     this.setState({
-      showInputFields: true
+      taskName: event.target.value
     })
   },
 
   render() {
     return (
       <tr>
-        <td> {this.formatSlot(this.props.timeSlot.slot)} </td>
-        <td>
-          {
-            this.state.task
-              ? this.state.task
-              : <span>
-                  { this.state.showInputFields
-                  ? <input type='text' placeholder='What do you want to do?' /> 
-                  : null }
-                  <button onClick={this.addTask}> Add Task </button>
-                </span>
-          }
+        <td> { this.formatSlot(this.props.timeSlot.slot) } </td>
+        <td> { this.state.taskName } </td>
+        <td> <span>
+              { this.state.showInputFields
+                ? <input 
+                    type='text'
+                    placeholder='What do you want to do?'
+                    value={this.state.taskName}
+                    onChange={this.handleTaskNameChange}
+                  /> 
+                : null }
+                <button onClick={this.createTask}> Add Task </button>
+              </span>
         </td>
       </tr>
     )
@@ -60,33 +76,46 @@ var TimeSlot = React.createClass({
 
 var Day = React.createClass({
 
+  // startTime, duration is in hours.
+  createTask(startTime, duration, name) {
+    var slots = [];
+    var endTime = startTime + duration * 2;
+    var current = startTime;
+    while(current < endTime) {
+      this.refs[current].setTask(name);
+      current++;
+    }
+  },
+
   render() {
     const timeSlots = [];
     let current = START_TIME;
     let id = 1;
+    var createTask = this.createTask;
     while(current < END_TIME) {
       timeSlots.push({ 
         id: id++,
         slot: {
-          start: current,
-          end: current + 0.5
+          startTime: current,
+          endTime: current + 0.5
         }
       });
       current = current + 0.5;
     }
 
     const rows = timeSlots.map(function(timeSlot) {
-      return (<TimeSlot key={timeSlot.id} timeSlot={timeSlot}/>);
+      return (<TimeSlot key={timeSlot.id} timeSlot={timeSlot} createTask={createTask} ref={timeSlot.id} />);
     })
 
     return (
       <div>
-        <h2> {this.props.title} </h2>
+        <h2 className='title'> {this.props.title} </h2>
         <table>
           <thead>
             <tr>
               <th> Time </th>
               <th> Tasks </th>
+              <th> Add Revision </th>
             </tr>
           </thead>
           <tbody>
@@ -102,8 +131,7 @@ var App = React.createClass({
   render () {
     return (
       <div>
-        <Day title='Day 1'/>
-        <p> Hello React!</p>
+        <Day title='Today'/>
       </div>
     );
   }
