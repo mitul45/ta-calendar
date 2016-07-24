@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TimeSlot from './TimeSlot'
 
 const START_TIME = 9.5;
@@ -14,8 +14,7 @@ var Day = React.createClass({
    * @param {String} name - task name
    */
   createTask(startSlotID, duration, name) {
-    var slots = [];
-    var endSlotID = startSlotID + duration * 2; // one hour is two slots.
+    var endSlotID = startSlotID + (duration * 2); // one hour is two slots.
     var current = startSlotID;
     while(current < endSlotID) {
       this.refs[current].setTask(name);
@@ -38,7 +37,7 @@ var Day = React.createClass({
           endTime: current + 0.5
         }
       });
-      current = current + 0.5;
+      current +=  0.5;
     }
 
     // Each time slot is a row

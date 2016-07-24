@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 var TimeSlot = React.createClass({
   
@@ -12,7 +12,7 @@ var TimeSlot = React.createClass({
     if (Number.isInteger(time))
       return time + ":00";
     else
-      return (time - 0.5 + ":30");
+      return ((time - 0.5) + ":30");
   },
 
   /**
@@ -27,7 +27,7 @@ var TimeSlot = React.createClass({
   getInitialState() {
     return {
       showInputFields: false,
-      taskName: null
+      taskName: ""
     }
   },
 
@@ -49,7 +49,7 @@ var TimeSlot = React.createClass({
    * Flow: 
    * 1. Add task of any TimeSlot -> Call parent CreateTask -> Call each TimeSlot's setTask
    */
-  createTask() {
+  handleTaskCreation() {
     // if input fields are already shown, create a new task.
     if (this.state.showInputFields) {
       this.props.createTask(this.props.timeSlot.id, 2, this.state.taskName)
@@ -84,7 +84,7 @@ var TimeSlot = React.createClass({
                     onChange={this.handleTaskNameChange}
                   /> 
                 : null }
-                <button onClick={this.createTask}> Add Task </button>
+                <button onClick={this.handleTaskCreation}> Add Task </button>
               </span>
         </td>
       </tr>
