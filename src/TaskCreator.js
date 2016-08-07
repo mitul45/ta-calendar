@@ -21,8 +21,8 @@ var TaskCreator = React.createClass({
    * @param {Number} duration - number of hours the task will take.
    * @param {String} name - task name
    */
-  createTask(startSlotID, duration, name) {
-    console.log('task created');
+  handleTaskCreation(startSlotID, duration, name) {
+    this.props.createTask(this.state.taskName, this.state.taskDuration, this.state.startTime);
     //var endSlotID = startSlotID + (duration * 2); // one hour is two slots.
     //var current = startSlotID;
     //while(current < endSlotID) {
@@ -90,7 +90,7 @@ var TaskCreator = React.createClass({
           </select>
         </div>
         <div className='task-creator__add-btn'>
-          <button onClick={this.handleTaskCreation}> Add </button>
+          <button type='button' onClick={this.handleTaskCreation}> Add </button>
         </div>
       </form>
     )

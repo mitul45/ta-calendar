@@ -7,11 +7,16 @@ import Header from './Header';
 //import TomorrowList from './TomorrowList';
 
 var App = React.createClass({
+
+  createTask(name, duration, startTime) {
+    console.log(name + duration + startTime);
+  },
+
   render () {
     return (
       <div>
         <Header />
-        <TaskCreator />
+        <TaskCreator createTask={this.createTask} />
         <Day title='Today'/>
       </div>
     );
