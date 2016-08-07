@@ -4,15 +4,38 @@ table, td, th {
 
 table {
   border-collapse: collapse;
-  width: 70%;
   text-align: center;
-  margin-left: 15%;
+  width: 100%;
 }
 
 th, td {
   padding: 15px;
 }
 
-.title {
-  text-align: center;
+th.time {
+  width: 20%;
+}
+
+th.task {
+  width: 80%;
+}
+
+html {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.task-creator {
+  display: flex;
+}
+
+.task-creator input{
+  flex-grow: 10;
+}
+
+.task-creator select {
+}
+
+.task-creator button {
+  flex-grow: 1;
 }

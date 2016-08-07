@@ -26,7 +26,6 @@ var Day = React.createClass({
     const timeSlots = [];
     let current = START_TIME;
     let id = 0;
-    var createTask = this.createTask; // timeSlot will call this function when user wants to add a task.
 
     // create half hours slots based on START_TIME and END_TIME
     while(current < END_TIME) {
@@ -42,19 +41,17 @@ var Day = React.createClass({
 
     // Each time slot is a row
     const rows = timeSlots.map(function(timeSlot) {
-      return (<TimeSlot key={timeSlot.id} timeSlot={timeSlot} createTask={createTask} ref={timeSlot.id} />);
+      return (<TimeSlot key={timeSlot.id} timeSlot={timeSlot} ref={timeSlot.id} />);
     })
 
     // Create a table for this day
     return (
       <div>
-        <h2 className='title'> {this.props.title} </h2>
         <table>
           <thead>
             <tr>
-              <th> Time </th>
-              <th> Tasks </th>
-              <th> Add Revision </th>
+              <th className='time'> Time </th>
+              <th className='task'> Tasks </th>
             </tr>
           </thead>
           <tbody>
