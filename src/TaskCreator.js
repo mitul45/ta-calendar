@@ -66,7 +66,7 @@ var TaskCreator = React.createClass({
     
     return (
       <form className='task-creator'>
-        <div>
+        <div className='task-creator__task-name'>
           <input 
             type='text'
             placeholder='task...'
@@ -74,7 +74,7 @@ var TaskCreator = React.createClass({
             onChange={this.handleTaskNameChange}
           />
         </div>
-        <div>
+        <div className='task-creator__duration'>
           <select value={this.state.taskDuration} onChange={this.handleTaskDurationChange}>
             <option value="0.5"> 30 minutes </option>
             <option value="1"> 1 hour </option>
@@ -84,12 +84,12 @@ var TaskCreator = React.createClass({
             <option value="3"> 3 hours </option>
           </select>
         </div>
-        <div>
+        <div className='task-creator__start-time'>
           <select value={this.state.startTime} onChange={this.handleStartTimeChange}>
             { startTimes }
           </select>
         </div>
-        <div>
+        <div className='task-creator__add-btn'>
           <button onClick={this.handleTaskCreation}> Add </button>
         </div>
       </form>
