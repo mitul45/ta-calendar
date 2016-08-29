@@ -9,7 +9,7 @@ import Header from './Header';
 var App = React.createClass({
 
   createTask(name, duration, startTime) {
-    console.log(name + duration + startTime);
+    this.refs.today.createTask(name, duration, startTime);
   },
 
   render () {
@@ -17,7 +17,7 @@ var App = React.createClass({
       <div>
         <Header />
         <TaskCreator createTask={this.createTask} />
-        <Day title='Today'/>
+        <Day title='Today' ref='today' />
       </div>
     );
   }

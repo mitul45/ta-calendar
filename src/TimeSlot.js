@@ -24,28 +24,11 @@ var TimeSlot = React.createClass({
     return this.formatTime(slot.startTime) + ' – ' + this.formatTime(slot.endTime);
   },
 
-  getInitialState() {
-    return {
-      taskName: "",
-    }
-  },
-
-  /**
-   * Set task for this particular time slot.
-   * This will be called from Day (parent). 
-   * @param {String} task: task name
-   */
-  setTask(task) {
-    this.setState({
-      taskName: task
-    })
-  },
-
   render() {
     return (
       <tr>
         <td> { this.formatSlot(this.props.timeSlot.slot) } </td>
-        <td> { this.state.taskName } </td>
+        <td> { this.props.timeSlot.taskName } </td>
       </tr>
     )
   }

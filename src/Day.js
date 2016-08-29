@@ -13,36 +13,59 @@ var Day = React.createClass({
    * @param {Number} duration - number of hours the task will take.
    * @param {String} name - task name
    */
-  createTask(startSlotID, duration, name) {
-    var endSlotID = startSlotID + (duration * 2); // one hour is two slots.
-    var current = startSlotID;
-    while(current < endSlotID) {
-      this.refs[current].setTask(name);
-      current++;
+  createTask(name, duration, startTime) {
+    startTime = Number(startTime)
+    duration = Number(duration)
+    const endTime = startTime + duration
+
+    let newState = JSON.parse(JSON.stringify(this.state))
+
+    var current = startTime;
+    while(current < endTime) {
+      newState.timeSlots[current].taskName = name;
+      current += 0.5;
     }
+
+
+    this.setState(newState);
   },
 
-  render() {
-    const timeSlots = [];
+  
+  getInitialState() {
+    const timeSlots = {};
     let current = START_TIME;
     let id = 0;
 
     // create half hours slots based on START_TIME and END_TIME
     while(current < END_TIME) {
-      timeSlots.push({ 
+      timeSlots[current] = { 
         id: id++,
+        taskName: "",
         slot: {
           startTime: current,
           endTime: current + 0.5
-        }
-      });
+        },
+      };
       current +=  0.5;
     }
 
+    return {
+      timeSlots: timeSlots,
+    }
+  },
+
+  render() {
+
     // Each time slot is a row
-    const rows = timeSlots.map(function(timeSlot) {
-      return (<TimeSlot key={timeSlot.id} timeSlot={timeSlot} ref={timeSlot.id} />);
-    })
+    const slotRows = [];
+
+    for (let slot in this.state.timeSlots) {
+      if (this.state.timeSlots.hasOwnProperty(slot)) {
+        const timeSlot = this.state.timeSlots[slot];
+        slotRows.push(<TimeSlot key={timeSlot.id} timeSlot={timeSlot} />)
+      }
+    }
+
 
     // Create a table for this day
     return (
@@ -55,7 +78,7 @@ var Day = React.createClass({
             </tr>
           </thead>
           <tbody>
-            {rows}
+            {slotRows}
           </tbody>
         </table>
       </div>

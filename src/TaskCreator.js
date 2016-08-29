@@ -61,7 +61,7 @@ var TaskCreator = React.createClass({
     const startTimes = [];
 
     for (let i = START_TIME; i < END_TIME; i += 0.5) {
-      startTimes.push(<option value={i}> { this.formatTime(i) } </option>);
+      startTimes.push(<option value={i} key={i}> { this.formatTime(i) } </option>);
     }
     
     return (
