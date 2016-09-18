@@ -97,12 +97,30 @@ var Day = React.createClass({
     this.serializeState({ timeSlots: newSlots })
   },
 
+  deleteTask(timeSlot) {
+    // #deepcopy
+    let newSlots = JSON.parse(JSON.stringify(this.state.timeSlots));
+
+    newSlots.forEach(function (slot) {
+      if (slot.id === timeSlot.id) {
+        slot.taskName = "";
+      }
+    })
+
+    this.setState({
+      timeSlots: newSlots
+    });
+
+    // update localStorage too
+    this.serializeState({ timeSlots: newSlots })
+  },
   
   render() {
 
+    let that = this;
     const slotRows = [];
     this.state.timeSlots.forEach(function (timeSlot) {
-        slotRows.push(<TimeSlot key={timeSlot.id} timeSlot={timeSlot} />)
+        slotRows.push(<TimeSlot key={timeSlot.id} timeSlot={timeSlot} deleteTask={that.deleteTask} />)
     })
 
     return (

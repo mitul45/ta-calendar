@@ -12,11 +12,21 @@ var TimeSlot = React.createClass({
     return Utils.formatTime(slot.startTime) + ' – ' + Utils.formatTime(slot.endTime);
   },
 
+  deleteTask() {
+    this.props.deleteTask(this.props.timeSlot);
+  },
+
   render() {
     return (
       <tr>
         <td> { this.formatSlot(this.props.timeSlot.slot) } </td>
-        <td> { this.props.timeSlot.taskName } </td>
+        <td className='time-slot__task'> 
+          { this.props.timeSlot.taskName } 
+          { this.props.timeSlot.taskName !== '' ? 
+            <button className='time-slot__remove-btn' type='button' onClick={this.deleteTask}> Remove </button>
+            : null
+          }
+        </td>
       </tr>
     )
   }

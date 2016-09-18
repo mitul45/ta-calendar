@@ -66,3 +66,20 @@ html {
 .task-creator__start-time select{
   flex-grow: 1;
 }
+
+.time-slot__task {
+  position: relative;
+}
+
+.time-slot__remove-btn {
+  display: none;
+
+  float: right;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.time-slot__task:hover .time-slot__remove-btn {
+  display: block;
+}
