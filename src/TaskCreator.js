@@ -1,7 +1,14 @@
+/**
+ * Module for adding task, consisting input box for task name,
+ * and two select fields for duration and start time.
+ * 
+ * Calls parents addTask method on creation of task
+ */
 import React from 'react';
+import Utils from './Utils'
 
-const START_TIME = 9.5;
-const END_TIME = 18;
+const START_TIME = Utils.START_TIME;
+const END_TIME = Utils.END_TIME;
 
 var TaskCreator = React.createClass({
   
@@ -13,10 +20,16 @@ var TaskCreator = React.createClass({
     }
   },
 
-
-  handleTaskCreation(startSlotID, duration, name) {
-    this.props.createTask(this.state.taskName, this.state.taskDuration, this.state.startTime);
+  /**
+   * Onclick handler for `Add` button
+   */
+  addTask() {
+    this.props.addTask(this.state.taskName, this.state.taskDuration, this.state.startTime);
   },
+
+  /**
+   * Handlers for keeping internal state, and view in sync
+   */
 
   handleTaskNameChange(event) {
     this.setState({
@@ -36,18 +49,11 @@ var TaskCreator = React.createClass({
     })
   },
 
-  formatTime(time) {
-    if (Number.isInteger(time))
-      return time + ":00";
-    else
-      return ((time - 0.5) + ":30");
-  },
-
   render() {
-    const startTimes = [];
 
+    const startTimes = [];
     for (let i = START_TIME; i < END_TIME; i += 0.5) {
-      startTimes.push(<option value={i} key={i}> { this.formatTime(i) } </option>);
+      startTimes.push(<option value={i} key={i}> { Utils.formatTime(i) } </option>);
     }
     
     return (
@@ -76,7 +82,7 @@ var TaskCreator = React.createClass({
           </select>
         </div>
         <div className='task-creator__add-btn'>
-          <button type='button' onClick={this.handleTaskCreation}> Add </button>
+          <button type='button' onClick={this.addTask}> Add </button>
         </div>
       </form>
     )

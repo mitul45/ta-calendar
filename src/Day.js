@@ -1,27 +1,31 @@
+/**
+ * Module for displaying a day's tasks.
+ */
 import React from 'react';
 import TimeSlot from './TimeSlot'
+import Utils from './Utils'
 
-const START_TIME = 9.5;
-const END_TIME = 18;
+const START_TIME = Utils.START_TIME;
+const END_TIME = Utils.END_TIME;
 
 var Day = React.createClass({
 
-  createTask(name, duration, startTime) {
-    startTime = Number(startTime)
-    duration = Number(duration)
-    const endTime = startTime + duration
-
-    let newState = JSON.parse(JSON.stringify(this.state))
-
-    var current = startTime;
-    while(current < endTime) {
-      newState.timeSlots[current].taskName = name;
-      current += 0.5;
-    }
-    this.setState(newState);
-  },
-
-  
+  /**
+   * @returns
+   * {
+   *   timeSlots: {
+   *     9.5: {
+   *       id: 0,
+   *       taskName: 'Get started',
+   *       slot: {
+   *         startTime: '9.5',
+   *         endTime: '10'
+   *       }
+   *     },
+   *     ...
+   *   }
+   * }
+   */
   getInitialState() {
     const timeSlots = {};
     let current = START_TIME;
@@ -45,10 +49,32 @@ var Day = React.createClass({
     }
   },
 
+  /**
+   * Add a task - update the state accordingly
+   * 
+   * @param {String} name
+   * @param {any} duration
+   * @param {any} startTime
+   */
+  addTask(name, duration, startTime) {
+    startTime = Number(startTime)
+    duration = Number(duration)
+    const endTime = startTime + duration
+
+    let newState = JSON.parse(JSON.stringify(this.state))
+
+    var current = startTime;
+    while(current < endTime) {
+      newState.timeSlots[current].taskName = name;
+      current += 0.5;
+    }
+    this.setState(newState);
+  },
+
+  
   render() {
 
     const slotRows = [];
-
     for (let slot in this.state.timeSlots) {
       if (this.state.timeSlots.hasOwnProperty(slot)) {
         const timeSlot = this.state.timeSlots[slot];
