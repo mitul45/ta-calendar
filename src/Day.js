@@ -27,6 +27,14 @@ var Day = React.createClass({
    * }
    */
   getInitialState() {
+
+    // if browser has some stored state, that's what we look for :D
+    let previousState = this.deserializeState();
+    if (previousState) {
+      return previousState;
+    }
+
+    // otherwise create empty day with no tasks.
     const timeSlots = [];
     let id = 0;
 
@@ -44,6 +52,21 @@ var Day = React.createClass({
     return {
       timeSlots,
     }
+  },
+
+  /**
+   * Set state in localStorage
+   * @param {Object} state
+   */
+  serializeState(state) {
+    localStorage.setItem(Utils.localStorageKey, JSON.stringify(state));
+  },
+
+  /**
+   * Get state from browser's local storage, if it exists
+   */
+  deserializeState() {
+    return JSON.parse(localStorage.getItem(Utils.localStorageKey));
   },
 
   /**
@@ -69,6 +92,9 @@ var Day = React.createClass({
     this.setState({
       timeSlots: newSlots
     });
+
+    // update localStorage too
+    this.serializeState({ timeSlots: newSlots })
   },
 
   

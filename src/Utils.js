@@ -13,9 +13,11 @@ function formatTime(time) {
 
 const START_TIME = 9.5;
 const END_TIME = 18;
+const localStorageKey = 'calender_state';
 
 export default {
   formatTime,
+  localStorageKey,
   START_TIME,
   END_TIME
 }
