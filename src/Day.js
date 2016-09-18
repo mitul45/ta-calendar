@@ -27,25 +27,22 @@ var Day = React.createClass({
    * }
    */
   getInitialState() {
-    const timeSlots = {};
-    let current = START_TIME;
+    const timeSlots = [];
     let id = 0;
 
     // create half hours slots based on START_TIME and END_TIME
-    while(current < END_TIME) {
-      timeSlots[current] = { 
+    for(let current = Utils.START_TIME; current < Utils.END_TIME; current += 0.5) {
+      timeSlots.push({ 
         id: id++,
         taskName: "",
         slot: {
           startTime: current,
           endTime: current + 0.5
         },
-      };
-      current +=  0.5;
+      });
     }
-
     return {
-      timeSlots: timeSlots,
+      timeSlots,
     }
   },
 
@@ -57,30 +54,30 @@ var Day = React.createClass({
    * @param {any} startTime
    */
   addTask(name, duration, startTime) {
-    startTime = Number(startTime)
-    duration = Number(duration)
-    const endTime = startTime + duration
+    startTime = Number(startTime);
+    duration = Number(duration);
+    const endTime = startTime + duration;
 
-    let newState = JSON.parse(JSON.stringify(this.state))
+    // #deepcopy
+    let newSlots = JSON.parse(JSON.stringify(this.state.timeSlots));
 
-    var current = startTime;
-    while(current < endTime) {
-      newState.timeSlots[current].taskName = name;
-      current += 0.5;
-    }
-    this.setState(newState);
+    newSlots.forEach(function (timeSlot) {
+      if (timeSlot.slot.startTime >= startTime  && timeSlot.slot.endTime <= endTime) {
+        timeSlot.taskName = name;
+      }
+    })
+    this.setState({
+      timeSlots: newSlots
+    });
   },
 
   
   render() {
 
     const slotRows = [];
-    for (let slot in this.state.timeSlots) {
-      if (this.state.timeSlots.hasOwnProperty(slot)) {
-        const timeSlot = this.state.timeSlots[slot];
+    this.state.timeSlots.forEach(function (timeSlot) {
         slotRows.push(<TimeSlot key={timeSlot.id} timeSlot={timeSlot} />)
-      }
-    }
+    })
 
     return (
       <div>
