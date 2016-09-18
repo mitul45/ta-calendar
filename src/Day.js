@@ -6,13 +6,6 @@ const END_TIME = 18;
 
 var Day = React.createClass({
 
-  /**
-   * TimeSlot will call this function when it wants to create a task.
-   * This function will eventually call setTask method of each timeslots to set tasks for that period.
-   * @param {String} startSlotID - id of the slot from which a task will start.
-   * @param {Number} duration - number of hours the task will take.
-   * @param {String} name - task name
-   */
   createTask(name, duration, startTime) {
     startTime = Number(startTime)
     duration = Number(duration)
@@ -25,8 +18,6 @@ var Day = React.createClass({
       newState.timeSlots[current].taskName = name;
       current += 0.5;
     }
-
-
     this.setState(newState);
   },
 
@@ -56,7 +47,6 @@ var Day = React.createClass({
 
   render() {
 
-    // Each time slot is a row
     const slotRows = [];
 
     for (let slot in this.state.timeSlots) {
@@ -66,8 +56,6 @@ var Day = React.createClass({
       }
     }
 
-
-    // Create a table for this day
     return (
       <div>
         <table>

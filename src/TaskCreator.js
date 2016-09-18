@@ -14,21 +14,8 @@ var TaskCreator = React.createClass({
   },
 
 
-  /**
-   * TimeSlot will call this function when it wants to create a task.
-   * This function will eventually call setTask method of each timeslots to set tasks for that period.
-   * @param {String} startSlotID - id of the slot from which a task will start.
-   * @param {Number} duration - number of hours the task will take.
-   * @param {String} name - task name
-   */
   handleTaskCreation(startSlotID, duration, name) {
     this.props.createTask(this.state.taskName, this.state.taskDuration, this.state.startTime);
-    //var endSlotID = startSlotID + (duration * 2); // one hour is two slots.
-    //var current = startSlotID;
-    //while(current < endSlotID) {
-      //this.refs[current].setTask(name);
-      //current++;
-    //}
   },
 
   handleTaskNameChange(event) {
@@ -55,7 +42,6 @@ var TaskCreator = React.createClass({
     else
       return ((time - 0.5) + ":30");
   },
-
 
   render() {
     const startTimes = [];
