@@ -129,7 +129,8 @@ var Day = React.createClass({
           <thead>
             <tr>
               <th className='time'> Time </th>
-              <th className='task'> Tasks </th>
+              <th className='task'> Task </th>
+              <th className='done'> Done </th>
             </tr>
           </thead>
           <tbody>

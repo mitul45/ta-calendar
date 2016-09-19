@@ -83,3 +83,7 @@ html {
 .time-slot__task:hover .time-slot__remove-btn {
   display: block;
 }
+
+.time-slot__task--done {
+  text-decoration: line-through;
+}
