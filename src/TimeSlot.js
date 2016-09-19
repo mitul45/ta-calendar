@@ -35,7 +35,7 @@ var TimeSlot = React.createClass({
 
   render() {
     return (
-      <tr>
+      <tr className={this.props.timeSlot.active? 'time-slot--active': ''}>
         <td> { this.formatSlot(this.props.timeSlot.slot) } </td>
         <td className={this.state.done? 'time-slot__task time-slot__task--done' : 'time-slot__task'}> 
           { this.props.timeSlot.taskName } 

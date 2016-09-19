@@ -6,6 +6,7 @@ table {
   border-collapse: collapse;
   text-align: center;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 th, td {
@@ -86,4 +87,8 @@ html {
 
 .time-slot__task--done {
   text-decoration: line-through;
+}
+
+.time-slot--active {
+  background-color: aliceblue;
 }

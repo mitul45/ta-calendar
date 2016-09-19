@@ -22,6 +22,7 @@ var Day = React.createClass({
    *         endTime: '10'
    *       }
    *     },
+   *     active: false,
    *     ...
    *   }
    * }
@@ -47,6 +48,7 @@ var Day = React.createClass({
           startTime: current,
           endTime: current + 0.5
         },
+        active: false,
       });
     }
     return {
@@ -114,7 +116,38 @@ var Day = React.createClass({
     // update localStorage too
     this.serializeState({ timeSlots: newSlots })
   },
+
+  /**
+   * Get current time in required format
+   * 13:30 -> 13.5
+   */
+  getCurrentTime() {
+    const date = new Date();
+    return date.getHours() + (date.getMinutes() / 60);
+  },
+
+  updateActiveSlot() {
+    const current = this.getCurrentTime();
+
+    // #deepcopy
+    let newSlots = JSON.parse(JSON.stringify(this.state.timeSlots));
+    newSlots.forEach(function (slot) {
+      if (slot.slot.startTime <= current && current < slot.slot.endTime) {
+        slot.active = true;
+      } else {
+        slot.active = false;
+      }
+    })
+
+    this.setState({
+      timeSlots: newSlots
+    });
+  },
   
+  componentDidMount() {
+    setInterval(this.updateActiveSlot, 1000);
+  },
+
   render() {
 
     let that = this;
