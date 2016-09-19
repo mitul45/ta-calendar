@@ -25,6 +25,7 @@ var TaskCreator = React.createClass({
    */
   addTask() {
     this.props.addTask(this.state.taskName, this.state.taskDuration, this.state.startTime);
+    this.setState(this.getInitialState());
   },
 
   /**
