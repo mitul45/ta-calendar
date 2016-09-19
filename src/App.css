@@ -92,3 +92,18 @@ html {
 .time-slot--active {
   background-color: aliceblue;
 }
+
+.header__text {
+  display: inline-block;
+  height: 35px;
+  vertical-align: super;
+  margin-left: 15px;
+}
+
+.header__logo {
+  width: 35px;
+}
+
+.header__logo img {
+  width: 35px;
+}
