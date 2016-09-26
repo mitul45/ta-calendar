@@ -144,6 +144,29 @@ var Day = React.createClass({
   },
 
   /**
+   * Create task when some of it's child got updated through doubleclick event
+   * @param {any} timeSlot
+   * @param {string} taskName
+   */
+  createTask(timeSlot, taskName) {
+    // #deepcopy
+    let newSlots = JSON.parse(JSON.stringify(this.state.timeSlots));
+
+    newSlots.forEach(function (slot) {
+      if (slot.id === timeSlot.id) {
+        slot.taskName = taskName;
+      }
+    })
+
+    this.setState({
+      timeSlots: newSlots
+    });
+
+    // update localStorage too
+    this.serializeState({ timeSlots: newSlots })
+  },
+
+  /**
    * Get current time in required format
    * 13:30 -> 13.5
    */
@@ -184,7 +207,8 @@ var Day = React.createClass({
             key={timeSlot.id} 
             timeSlot={timeSlot} 
             deleteTask={that.deleteTask}
-            completeTask={that.completeTask} 
+            completeTask={that.completeTask}
+            createTask={that.createTask}
           />
         )
     })

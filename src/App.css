@@ -73,6 +73,11 @@ html {
   text-align: left;
 }
 
+.time-slot__task:hover {
+  background-color: beige;
+  cursor: pointer;
+}
+
 .time-slot__remove-btn {
   display: none;
 
@@ -106,4 +111,8 @@ html {
 
 .header__logo img {
   width: 35px;
+}
+
+.time-slot__task__name {
+  padding-left: 15px;
 }

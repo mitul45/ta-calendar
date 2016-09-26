@@ -3,12 +3,6 @@ import Utils from './Utils';
 
 var TimeSlot = React.createClass({
   
-  getInitialState() {
-    return {
-      taskName: "",
-    }
-  },
-
   /**
    * Format a slot object to human readable time. 
    * @param {Object} slot
@@ -22,28 +16,44 @@ var TimeSlot = React.createClass({
     this.props.deleteTask(this.props.timeSlot);
   },
 
-  handleChange(event) {
+  handleCheckboxChange(event) {
     this.props.completeTask(this.props.timeSlot, event.target.checked);
   },
 
-  createTask() {
+  /**
+   * Ask for input and create task
+   */
+  handleDoubleClick() {
+    const taskName = prompt('What do you want to achieve?');
+    this.createTask(taskName);
+  },
 
+  /**
+   * create task in parent scope.
+   * @param {any} taskName
+   */
+  createTask(taskName) {
+    this.props.createTask(this.props.timeSlot, taskName);
   },
 
   render() {
     return (
       <tr className={this.props.timeSlot.active? 'time-slot--active': ''}>
         <td> { this.formatSlot(this.props.timeSlot.slot) } </td>
-        <td className={this.props.timeSlot.done? 'time-slot__task time-slot__task--done' : 'time-slot__task'}> 
+        <td 
+          className={this.props.timeSlot.done ? 'time-slot__task time-slot__task--done' : 'time-slot__task'}
+          onDoubleClick={this.handleDoubleClick}
+        > 
 
           <input type="checkbox"
             checked={this.props.timeSlot.done}
-            onChange={this.handleChange}
+            onChange={this.handleCheckboxChange}
           />
+          
+          <span className='time-slot__task__name'>
+            { this.props.timeSlot.taskName }
+          </span>
 
-          &nbsp;&nbsp;&nbsp;
-
-          { this.props.timeSlot.taskName } 
           { this.props.timeSlot.taskName !== '' ? 
             <button className='time-slot__remove-btn' type='button' onClick={this.deleteTask}> Remove </button>
             : null
