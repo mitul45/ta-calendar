@@ -120,13 +120,12 @@ var Day = React.createClass({
   },
 
   /**
-   * 
    * Mark task as done.
    * @param {Object} timeSlot
    * @param {boolean} completeState
    */
   completeTask(timeSlot, completeState) {
-        // #deepcopy
+    // #deepcopy
     let newSlots = JSON.parse(JSON.stringify(this.state.timeSlots));
 
     newSlots.forEach(function (slot) {

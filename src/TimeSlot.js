@@ -5,7 +5,7 @@ var TimeSlot = React.createClass({
   
   getInitialState() {
     return {
-      done: false,
+      taskName: "",
     }
   },
 
@@ -15,20 +15,19 @@ var TimeSlot = React.createClass({
    * @returns {String}
    */
   formatSlot(slot) {
-    return Utils.formatTime(slot.startTime) + ' – ' + Utils.formatTime(slot.endTime);
+    return Utils.formatTime(slot.startTime);
   },
 
   deleteTask() {
     this.props.deleteTask(this.props.timeSlot);
-    
-    // reset done
-    this.setState({
-      done: false,
-    })
   },
 
   handleChange(event) {
     this.props.completeTask(this.props.timeSlot, event.target.checked);
+  },
+
+  createTask() {
+
   },
 
   render() {
