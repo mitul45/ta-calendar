@@ -23,6 +23,7 @@ var Day = React.createClass({
    *       }
    *     },
    *     active: false,
+   *     done: false,
    *     ...
    *   }
    * }
@@ -49,6 +50,7 @@ var Day = React.createClass({
           endTime: current + 0.5
         },
         active: false,
+        done: false,
       });
     }
     return {
@@ -118,6 +120,30 @@ var Day = React.createClass({
   },
 
   /**
+   * 
+   * Mark task as done.
+   * @param {Object} timeSlot
+   * @param {boolean} completeState
+   */
+  completeTask(timeSlot, completeState) {
+        // #deepcopy
+    let newSlots = JSON.parse(JSON.stringify(this.state.timeSlots));
+
+    newSlots.forEach(function (slot) {
+      if (slot.id === timeSlot.id) {
+        slot.done = completeState;
+      }
+    })
+
+    this.setState({
+      timeSlots: newSlots
+    });
+
+    // update localStorage too
+    this.serializeState({ timeSlots: newSlots })
+  },
+
+  /**
    * Get current time in required format
    * 13:30 -> 13.5
    */
@@ -153,7 +179,14 @@ var Day = React.createClass({
     let that = this;
     const slotRows = [];
     this.state.timeSlots.forEach(function (timeSlot) {
-        slotRows.push(<TimeSlot key={timeSlot.id} timeSlot={timeSlot} deleteTask={that.deleteTask} />)
+        slotRows.push(
+          <TimeSlot 
+            key={timeSlot.id} 
+            timeSlot={timeSlot} 
+            deleteTask={that.deleteTask}
+            completeTask={that.completeTask} 
+          />
+        )
     })
 
     return (
@@ -163,7 +196,6 @@ var Day = React.createClass({
             <tr>
               <th className='time'> Time </th>
               <th className='task'> Task </th>
-              <th className='done'> Done </th>
             </tr>
           </thead>
           <tbody>

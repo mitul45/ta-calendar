@@ -70,6 +70,7 @@ html {
 
 .time-slot__task {
   position: relative;
+  text-align: left;
 }
 
 .time-slot__remove-btn {
@@ -86,7 +87,7 @@ html {
 }
 
 .time-slot__task--done {
-  text-decoration: line-through;
+  color: #CECECE;
 }
 
 .time-slot--active {

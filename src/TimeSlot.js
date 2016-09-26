@@ -28,27 +28,27 @@ var TimeSlot = React.createClass({
   },
 
   handleChange(event) {
-    let newState = {};
-    newState.done = event.target.checked;
-    this.setState(newState);
+    this.props.completeTask(this.props.timeSlot, event.target.checked);
   },
 
   render() {
     return (
       <tr className={this.props.timeSlot.active? 'time-slot--active': ''}>
         <td> { this.formatSlot(this.props.timeSlot.slot) } </td>
-        <td className={this.state.done? 'time-slot__task time-slot__task--done' : 'time-slot__task'}> 
+        <td className={this.props.timeSlot.done? 'time-slot__task time-slot__task--done' : 'time-slot__task'}> 
+
+          <input type="checkbox"
+            checked={this.props.timeSlot.done}
+            onChange={this.handleChange}
+          />
+
+          &nbsp;&nbsp;&nbsp;
+
           { this.props.timeSlot.taskName } 
           { this.props.timeSlot.taskName !== '' ? 
             <button className='time-slot__remove-btn' type='button' onClick={this.deleteTask}> Remove </button>
             : null
           }
-        </td>
-        <td>
-          <input type="checkbox"
-            checked={this.state.done}
-            onChange={this.handleChange}
-          />
         </td>
       </tr>
     )
