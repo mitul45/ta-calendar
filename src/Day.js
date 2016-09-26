@@ -108,6 +108,7 @@ var Day = React.createClass({
     newSlots.forEach(function (slot) {
       if (slot.id === timeSlot.id) {
         slot.taskName = "";
+        slot.done = false;
       }
     })
 
