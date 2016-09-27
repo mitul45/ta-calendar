@@ -25,7 +25,8 @@ var TimeSlot = React.createClass({
    */
   handleDoubleClick() {
     const taskName = prompt('What do you want to achieve?', this.props.timeSlot.taskName);
-    this.createTask(taskName);
+    if(taskName)
+      this.createTask(taskName);
   },
 
   /**
