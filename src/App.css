@@ -21,9 +21,15 @@ th.task {
   width: 80%;
 }
 
-html {
-  margin-left: 15%;
-  margin-right: 15%;
+.left {
+  margin-left: 5%;
+  margin-right: 25%;    
+}
+
+.right {
+  left: 77%;
+  position: absolute;
+  top: 20%;  
 }
 
 .task-creator {
@@ -115,4 +121,20 @@ html {
 
 .time-slot__task__name {
   padding-left: 15px;
+}
+
+.other-tasks{
+  width: 20%;
+}
+
+.other-tasks__input {
+  width: 100%;
+}
+
+.other-tasks__task-list {
+  font-size: 14px;
+}
+
+.other-tasks__task-list__item {
+  margin: 5px;
 }

@@ -58,7 +58,7 @@ var TaskCreator = React.createClass({
     }
     
     return (
-      <form className='task-creator'>
+      <form className='task-creator left'>
         <div className='task-creator__task-name'>
           <input 
             type='text'

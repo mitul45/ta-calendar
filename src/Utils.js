@@ -14,10 +14,12 @@ function formatTime(time) {
 const START_TIME = 9.5;
 const END_TIME = 18;
 const localStorageKey = 'calender_state';
+const otherTaskStorageKey = 'other_tasks';
 
 export default {
   formatTime,
   localStorageKey,
+  otherTaskStorageKey,
   START_TIME,
   END_TIME
 }
