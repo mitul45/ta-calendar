@@ -1,5 +1,6 @@
 table, td, th {
   border: 1px solid #ddd;
+  font-size: 14px;
 }
 
 table {
