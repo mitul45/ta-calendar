@@ -80,10 +80,14 @@ var TimeSlot = React.createClass({
           onDoubleClick={this.handleDoubleClick}
         > 
 
-          <input type="checkbox"
-            checked={this.props.timeSlot.done}
-            onChange={this.handleCheckboxChange}
-          />
+          { 
+            this.props.timeSlot.taskName
+            ? <input type="checkbox"
+                checked={this.props.timeSlot.done}
+                onChange={this.handleCheckboxChange}
+              />
+            : null
+          }
           
           <span className='time-slot__task__name'>
             { this.state.editable 
