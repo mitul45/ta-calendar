@@ -60,11 +60,11 @@ var Day = React.createClass({
     function getDefaultTask(id) {
       switch(id) {
         case 1: return 'your today\'s tasks go here'
-        case 2: return 'add task by double-clicking any section'
+        case 2: return 'add task by double-clicking a section'
         case 3: return 'completed task looks like this'
         case 4: return 'remove a task by clicking \'Remove\' which appears on hover'
         case 5: return 'you can also add longer tasks using bar on top'
-        case 6: return 'fork! if you like what you are seeing :)'
+        case 6: return 'fork/star! if you like what you are seeing :)'
         default: return ''
       }
     }
