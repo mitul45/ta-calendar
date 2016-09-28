@@ -31,40 +31,62 @@ var OtherTasks = React.createClass({
     return JSON.parse(localStorage.getItem(Utils.otherTaskStorageKey));
   },
 
+  /**
+   * Add a task, and update localStorage.
+   * @param {String} newTask
+   */
   createTask(newTask) {
     let taskList = this.state.taskList;
     taskList.push(newTask);
-    this.setState({
+    const newState = {
       taskList: taskList,
       newTask: '',
-    })
+    };
 
-    this.serializeState(this.state)
+    this.setState(newState);
+    this.serializeState(newState);
   },
 
+  /**
+   * Save task on enter and empty the input box on esc.
+   * @param {any} event
+   */
   handleKeyDown(event) {
-    if (event.keyCode == 13 ) {
+    if (event.keyCode === 13 ) {
       return this.createTask(this.state.newTask);
+    } else if (event.keyCode === 27) {
+      this.setState({
+        newTask: '',
+      })
     }
   },
 
+  /**
+   * Keep state and view in sync
+   */
   handleChange(event) {
     this.setState({
       newTask: event.target.value,
     })
   },
 
-  removeItem(taskToRemove) {
+  /**
+   * Remove item from tasklist, and update localStorage.
+   * 
+   * @param {String} taskToRemove
+   */
+  removeTask(taskToRemove) {
     let taskList = JSON.parse(JSON.stringify(this.state.taskList));
     let newTaskList = taskList.filter(function(task) {
       return task !== taskToRemove;
     })
 
-    this.setState({
+    const newState = {
       taskList: newTaskList,
-    })
+    };
 
-    this.serializeState(this.state);
+    this.setState(newState);
+    this.serializeState(newState);
   },
 
   render () {
@@ -75,7 +97,7 @@ var OtherTasks = React.createClass({
         <li className='other-tasks__task-list__item'>
           {task}&nbsp;
           (<a href='#'
-            onClick={() => that.removeItem(task)}
+            onClick={() => that.removeTask(task)}
           >done</a>)
         </li>
       );

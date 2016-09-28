@@ -69,7 +69,6 @@ th.task {
 }
 
 .time-slot__task:hover {
-  background-color: beige;
   cursor: pointer;
 }
 
@@ -142,4 +141,8 @@ th.task {
 .container--right {
   width: 25%;
   float: right;
+}
+
+.time-slot__task__name--input {
+  width: 80%;
 }

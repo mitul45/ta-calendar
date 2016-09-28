@@ -1,8 +1,16 @@
 import React from 'react';
 import Utils from './Utils';
+import ReactDOM from 'react-dom';
 
 var TimeSlot = React.createClass({
   
+  getInitialState() {
+    return {
+      taskName: this.props.timeSlot.taskName,
+      editable: false,
+    }
+  },
+
   /**
    * Format a slot object to human readable time. 
    * @param {Object} slot
@@ -21,12 +29,35 @@ var TimeSlot = React.createClass({
   },
 
   /**
-   * Ask for input and create task
+   * Mark this slot as editable, and show input field.
    */
   handleDoubleClick() {
-    const taskName = prompt('What do you want to achieve?', this.props.timeSlot.taskName);
-    if(taskName)
-      this.createTask(taskName);
+    this.setState({
+      editable: true,
+      newTask: this.props.timeSlot.taskName,
+    })
+  },
+
+  /**
+   * Keep view and state in sync
+   */
+  handleTextChange(event) {
+    this.setState({
+      newTask: event.target.value,
+    })
+  },
+
+  /**
+   * Save task on enter and restore to previous on esc.
+   */
+  handleKeyDown(event) {
+    if (event.keyCode === 13 ) {
+      this.createTask(this.state.newTask);
+    } else if (event.keyCode === 27) {
+      this.setState({
+        editable: false,
+      })
+    }
   },
 
   /**
@@ -35,6 +66,9 @@ var TimeSlot = React.createClass({
    */
   createTask(taskName) {
     this.props.createTask(this.props.timeSlot, taskName);
+    this.setState({
+      editable: false,
+    })
   },
 
   render() {
@@ -52,7 +86,17 @@ var TimeSlot = React.createClass({
           />
           
           <span className='time-slot__task__name'>
-            { this.props.timeSlot.taskName }
+            { this.state.editable 
+              ? <input
+                  autoFocus
+                  className='time-slot__task__name--input'
+                  type='text' 
+                  value={this.state.newTask} 
+                  onKeyDown={this.handleKeyDown} 
+                  onChange={this.handleTextChange}
+                />
+              : this.props.timeSlot.taskName
+            }
           </span>
 
           { this.props.timeSlot.taskName !== '' ? 

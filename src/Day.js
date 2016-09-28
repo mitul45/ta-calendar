@@ -93,12 +93,13 @@ var Day = React.createClass({
         timeSlot.taskName = name;
       }
     })
-    this.setState({
-      timeSlots: newSlots
-    });
 
-    // update localStorage too
-    this.serializeState({ timeSlots: newSlots })
+    const newState = {
+      timeSlots: newSlots
+    };
+
+    this.setState(newState);
+    this.serializeState(newState);
   },
 
   deleteTask(timeSlot) {
@@ -112,12 +113,12 @@ var Day = React.createClass({
       }
     })
 
-    this.setState({
+    const newState = {
       timeSlots: newSlots
-    });
+    };
 
-    // update localStorage too
-    this.serializeState({ timeSlots: newSlots })
+    this.setState(newState);
+    this.serializeState(newState);
   },
 
   /**
@@ -135,12 +136,12 @@ var Day = React.createClass({
       }
     })
 
-    this.setState({
+    const newState = {
       timeSlots: newSlots
-    });
+    };
 
-    // update localStorage too
-    this.serializeState({ timeSlots: newSlots })
+    this.setState(newState);
+    this.serializeState(newState);
   },
 
   /**
@@ -158,12 +159,12 @@ var Day = React.createClass({
       }
     })
 
-    this.setState({
+    const newState = {
       timeSlots: newSlots
-    });
+    };
 
-    // update localStorage too
-    this.serializeState({ timeSlots: newSlots })
+    this.setState(newState);
+    this.serializeState(newState);
   },
 
   /**
