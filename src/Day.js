@@ -214,7 +214,7 @@ var Day = React.createClass({
     })
 
     return (
-      <div className='left'>
+      <div>
         <table>
           <thead>
             <tr>

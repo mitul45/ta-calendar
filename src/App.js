@@ -18,9 +18,15 @@ var App = React.createClass({
     return (
       <div>
         <Header />
-        <TaskCreator addTask={this.addTask} />
-        <Day title='Today' ref='today' />
-        <OtherTasks />
+        <div className='container'>
+          <div className='container--left'>
+            <TaskCreator addTask={this.addTask} />
+            <Day title='Today' ref='today' />
+          </div>
+          <div className='container--right'>
+            <OtherTasks />
+          </div>
+        </div>
       </div>
     );
   }

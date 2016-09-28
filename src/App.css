@@ -21,17 +21,6 @@ th.task {
   width: 80%;
 }
 
-.left {
-  margin-left: 5%;
-  margin-right: 25%;    
-}
-
-.right {
-  left: 77%;
-  position: absolute;
-  top: 20%;  
-}
-
 .task-creator {
   display: flex;
   margin-bottom: 10px;
@@ -105,6 +94,10 @@ th.task {
   background-color: aliceblue;
 }
 
+.header {
+  margin-left: 5%;
+}
+
 .header__text {
   display: inline-block;
   height: 35px;
@@ -123,18 +116,30 @@ th.task {
   padding-left: 15px;
 }
 
-.other-tasks{
-  width: 20%;
-}
-
 .other-tasks__input {
   width: 100%;
 }
 
 .other-tasks__task-list {
   font-size: 14px;
+  padding-left: 12px;
 }
 
 .other-tasks__task-list__item {
   margin: 5px;
+}
+
+.container {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.container--left {
+  width: 70%;
+  display: inline-block;
+}
+
+.container--right {
+  width: 25%;
+  float: right;
 }
