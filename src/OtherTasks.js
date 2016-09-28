@@ -11,7 +11,10 @@ var OtherTasks = React.createClass({
     }
 
     return {
-      taskList: [],
+      taskList: [
+        'your upcoming tasks go here',
+        'try marking this one as done!'
+      ],
       newTask: '',
     }
   },

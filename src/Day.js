@@ -44,17 +44,29 @@ var Day = React.createClass({
     for(let current = Utils.START_TIME; current < Utils.END_TIME; current += 0.5) {
       timeSlots.push({ 
         id: id++,
-        taskName: "",
+        taskName: getDefaultTask(id),
         slot: {
           startTime: current,
           endTime: current + 0.5
         },
         active: false,
-        done: false,
+        done: id === 3,
       });
     }
     return {
       timeSlots,
+    }
+
+    function getDefaultTask(id) {
+      switch(id) {
+        case 1: return 'your today\'s tasks go here'
+        case 2: return 'add task by double-clicking any section'
+        case 3: return 'completed task looks like this'
+        case 4: return 'remove a task by clicking \'Remove\' which appears on hover'
+        case 5: return 'you can also add longer tasks using bar on top'
+        case 6: return 'fork! if you like what you are seeing :)'
+        default: return ''
+      }
     }
   },
 
