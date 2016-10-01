@@ -21,4 +21,5 @@ It's just a word I came up with. Probably a mixture of `task list`, `todo list`,
 ##Technology
 This app is built using [React](https://facebook.github.io/react/), and everything is stored in browser's `localStorage`. There is no server. The app, tasks, everything lives in your browser. So don't worry about privacy and other stuff. It uses GA to gather some fun stats.
 
-Check it out: https://mitul45.github.io/ta-calendar/.
+##Check it out
+https://mitul45.github.io/ta-calendar/
