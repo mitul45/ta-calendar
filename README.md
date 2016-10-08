@@ -1,5 +1,5 @@
 # ta - calendar
-An app to plan your day, _every minute of your day_. Have you ever felt the day is about to over and you haven't even started on the first thing to do? 
+An app to plan your day, _every minute of your day_. Have you ever felt the day is about to be over and you haven't even started on the first thing to do? 
   
 ##Motivation
 _"One of the most valuable skills in our economy is becoming increasingly rare."_ - [Cal Newport](http://calnewport.com/). 
