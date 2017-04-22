@@ -1,4 +1,4 @@
-# ta - calendar
+# 📋 ta - calendar
 An app to plan your day, _every minute of your day_. Have you ever felt the day is about to be over and you haven't even started on the first thing to do? 
   
 ## Motivation
